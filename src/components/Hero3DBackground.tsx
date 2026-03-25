@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useTheme } from './ThemeProvider';
 
 const ParticleWave = () => {
   const pointsRef = useRef<THREE.Points>(null);
@@ -68,6 +69,8 @@ const ParticleWave = () => {
 
 const CoreSphere = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const { theme } = useTheme();
+  const wireframeColor = theme === 'light' ? '#000000' : '#ffffff';
   
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -83,7 +86,7 @@ const CoreSphere = () => {
       {/* Outer wireframe */}
       <mesh>
         <icosahedronGeometry args={[2.5, 1]} />
-        <meshBasicMaterial color="#ffffff" wireframe transparent opacity={0.05} />
+        <meshBasicMaterial color={wireframeColor} wireframe transparent opacity={0.05} />
       </mesh>
       
       {/* Inner core */}
@@ -96,10 +99,13 @@ const CoreSphere = () => {
 };
 
 export default function Hero3DBackground() {
+  const { theme } = useTheme();
+  const fogColor = theme === 'light' ? '#ffffff' : '#050505';
+
   return (
     <div className="absolute inset-0 w-full h-full z-0 pointer-events-none opacity-100">
       <Canvas camera={{ position: [0, 2, 5], fov: 75 }}>
-        <fog attach="fog" args={['#050505', 5, 20]} />
+        <fog attach="fog" args={[fogColor, 5, 20]} />
         <ParticleWave />
         <CoreSphere />
       </Canvas>
