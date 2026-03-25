@@ -415,7 +415,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto">
           <FadeInSection className="mb-16 md:mb-24">
             <span className="micro-label block mb-4">Workflow</span>
-            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">全链路解决方案</h2>
+            <h2 className="text-3xl md:text-5xl font-light text-white tracking-tight">全链路的解决方案</h2>
           </FadeInSection>
 
           <motion.div 
